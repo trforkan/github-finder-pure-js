@@ -117,6 +117,8 @@ function searchUser() {
 
         let userRepos;
 
+        let reposCards;
+
         let searchProfileLink = url+username+'?'+clientId+'&'+clientSecretKey;
 
         console.log(searchProfileLink);
@@ -131,6 +133,49 @@ function searchUser() {
                     .then(res => res.json())
                     .then(repos => {
                         userRepos=repos;
+
+                        for(var i=0; i<userRepos.length; i++) {
+                            // console.log(userRepos[i].name);
+                            reposCards+=`
+                            <div style="
+                                height: 300px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between">
+                                <div style="
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-direction: column">
+                                    <h5>Name: ${userRepos[i].name}</h5>
+                                    <h5>Description: ${userRepos[i].description}</h5>
+                                    <h5>Created at: ${userRepos[i].created_at}</h5>
+                                    <h5>Updated at: {${userRepos[i].updated_at}</h5>
+                                    <h5>Forks: ${userRepos[i].forks}</h5>
+                                    <h5>Visibility: ${userRepos[i].visibility}</h5>
+                                </div>
+
+                                <div class="view-button" fxLayoutAlign="center center" style="
+                                    display: flex;
+                                    justify-content: center;
+                                    align-item: center;"
+                                    >
+                                    <a href="${userRepos[i].html_url}" >
+                                        <button style="
+                                        padding: 12px;
+                                        background-color: #E30F0F;
+                                        border-radius: 5px;">
+                                        <div >View Repository</div>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            `
+                        }
+
+                        console.log(reposCards)
+
                         console.log(userRepos);
                         console.log(userRepos.length);
                     })
@@ -351,41 +396,8 @@ function searchUser() {
                         border-radius: 5px;
                         ">
                         <!-- card -->
-                        <div style="
-                            height: 300px;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between">
-                            <div style="
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                flex-direction: column">
-                                <h5>Name: {{repos.name}}</h5>
-                                <h5>Description: {{repos.description}}</h5>
-                                <h5>Created at: {{repos.created_at}}</h5>
-                                <h5>Updated at: {{repos.updated_at}}</h5>
-                                <h5>Forks: {{repos.forks}}</h5>
-                                <h5>Visibility: {{repos.visibility}}</h5>
-                            </div>
-
-                            <!-- <h3>Comments: {{repoComments[0].length}}</h3> -->
-                            <div class="view-button" fxLayoutAlign="center center" style="
-                                display: flex;
-                                justify-content: center;
-                                align-item: center;"
-                                >
-                                <a href="{userRepos[1].html_url}" >
-                                    <button style="
-                                    padding: 12px;
-                                    background-color: #E30F0F;
-                                    border-radius: 5px;">
-                                    <div >View Repository</div>
-                                    </button>
-                                </a>
-                            </div>
-                            <!-- <br> -->
-                        </div>
+                        
+                        ${reposCards}
 
                         </mat-card>
 
