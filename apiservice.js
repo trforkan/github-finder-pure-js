@@ -15,6 +15,7 @@ var reposListCards="";
 
 function userReposList(userRepos)  {
     console.warn(userRepos)
+    reposListCards="";
     for(let i=0;i<userRepos.length;i++) {
         reposListCards+=`
         <div style="
@@ -66,7 +67,7 @@ function userReposList(userRepos)  {
 
 
 function searchUser() {
-    let username = 'f';
+    let username;
     username = document.getElementById('searchTxt').value;
     console.log(username);
 
@@ -75,9 +76,9 @@ function searchUser() {
 
         // document.getElementById("userInfoData").innerHTML = "<p>hello</p>"
 
-        let userRepos;
+        let userRepos="";
 
-        let reposCards;
+        let reposCards="";
 
         let searchProfileLink = url+username+'?'+clientId+'&'+clientSecretKey;
 
